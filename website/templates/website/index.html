@@ -1,0 +1,293 @@
+{% load django_bootstrap5 %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BlueStackOverFlow</title>
+    {% bootstrap_css %}
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Documentation de l'API</h1>
+        <p class="lead text-center">Voici la documentation complète de l'API que nous avons développée.</p>
+
+        <!-- Section: Authentification -->
+        <section id="authentification" class="my-5">
+            <h2>1. Authentification</h2>
+            <p>Cette section couvre les routes pour l'inscription et la connexion.</p>
+
+            <!-- Route: Register -->
+            <div class="card my-3">
+                <div class="card-header bg-primary text-white">
+                    <h5>POST /register/</h5>
+                </div>
+                <div class="card-body">
+                    <p>Permet de créer un nouvel utilisateur.</p>
+                    <h6>Paramètres requis :</h6>
+                    <ul>
+                        <li><strong>username</strong> : Nom d'utilisateur (string).</li>
+                        <li><strong>password</strong> : Mot de passe (string).</li>
+                        <li><strong>email</strong> : Adresse email (string).</li>
+                    </ul>
+                    <h6>Exemple de Réponse (Succès) :</h6>
+                    <pre><code>{
+    "message": "Utilisateur créé avec succès."
+}</code></pre>
+
+                </div>
+            </div>
+
+            <!-- Route: Login -->
+            <div class="card my-3">
+                <div class="card-header bg-primary text-white">
+                    <h5>POST /login/</h5>
+                </div>
+                <div class="card-body">
+                    <p>Permet de se connecter avec un compte existant.</p>
+                    <h6>Paramètres requis :</h6>
+                    <ul>
+                        <li><strong>username</strong> : Nom d'utilisateur (string).</li>
+                        <li><strong>password</strong> : Mot de passe (string).</li>
+                        <li><strong>email</strong> : Adresse email (string).</li>
+                    </ul>
+                    <h6>Exemple de Réponse (Succès) :</h6>
+                    <pre><code>{
+    "refresh": "eyJhbGciOiJIUzI1NiIs...",
+    "access": "eyJhbGciOiJIUzI1NiIs..."
+}</code></pre>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Questions -->
+        <section id="questions" class="my-5">
+            <h2>2. Questions</h2>
+            <p>Cette section couvre les routes pour gérer les questions.</p>
+
+            <!-- Route: GET /questions/ -->
+            <div class="card my-3">
+                <div class="card-header bg-secondary text-white">
+                    <h5>GET /questions/</h5>
+                </div>
+                <div class="card-body">
+                    <p>Récupère la liste des questions existantes.</p>
+                    <h6>Exemple de Réponse :</h6>
+                    <pre><code>[
+    {
+        "id": 1,
+        "title": "Comment fonctionne l'API ?",
+        "body": "Explication sur l'API...",
+        "author": "chat7",
+        "upvotes": 0,
+        "downvotes": 0,
+        "created_at": "2025-01-08T00:00:00Z"
+    }
+]</code></pre>
+                </div>
+            </div>
+
+            <!-- Route: POST /questions/ -->
+            <div class="card my-3">
+                <div class="card-header bg-secondary text-white">
+                    <h5>POST /questions/</h5>
+                </div>
+                <div class="card-body">
+                    <p>Permet de créer une nouvelle question.</p>
+                    <h6>Paramètres requis :</h6>
+                    <ul>
+                        <li><strong>title</strong> : Titre de la question (string).</li>
+                        <li><strong>body</strong> : Contenu de la question (string).</li>
+                    </ul>
+                    <h6>Exemple de Réponse (Succès) :</h6>
+                    <pre><code>{
+    "id": 1,
+    "title": "Comment fonctionne l'API ?",
+    "body": "Explication sur l'API...",
+    "author": "chat7",
+    "upvotes": 0,
+    "downvotes": 0,
+    "created_at": "2025-01-08T00:00:00Z"
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- Route: DELETE /questions/{id}/ -->
+            <div class="card my-3">
+                <div class="card-header bg-secondary text-white">
+                    <h5>DELETE /questions/{id}/</h5>
+                </div>
+                <div class="card-body">
+                    <p>Permet de supprimer une question (seulement par son auteur).</p>
+                    <h6>Exemple de Réponse (Succès) :</h6>
+                    <pre><code>{
+    "message": "Suppression de la question effectuée avec succès."
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- Route: Upvote Question -->
+            <div class="card my-3">
+                <div class="card-header bg-secondary text-white">
+                    <h5>POST /questions/{id}/upvote/</h5>
+                </div>
+                <div class="card-body">
+                    <p>Permet de voter positivement pour une question.</p>
+                    <h6>Exemple de Réponse (Succès) :</h6>
+                    <pre><code>{
+    "message": "Question upvotée",
+    "upvotes": 5
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- Route: Downvote Question -->
+            <div class="card my-3">
+                <div class="card-header bg-secondary text-white">
+                    <h5>POST /questions/{id}/downvote/</h5>
+                </div>
+                <div class="card-body">
+                    <p>Permet de voter négativement pour une question.</p>
+                    <h6>Exemple de Réponse (Succès) :</h6>
+                    <pre><code>{
+    "message": "Question downvotée",
+    "downvotes": 3
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Réponses -->
+        <section id="reponses" class="my-5">
+            <h2>3. Réponses</h2>
+            <p>Cette section couvre les routes pour gérer les réponses.</p>
+
+            <!-- Route: GET /answers/ -->
+            <div class="card my-3">
+                <div class="card-header bg-success text-white">
+                    <h5>GET /answers/</h5>
+                </div>
+                <div class="card-body">
+                    <p>Récupère la liste des réponses existantes.</p>
+                    <h6>Exemple de Réponse :</h6>
+                    <pre><code>[
+    {
+        "id": 1,
+        "question": 1,
+        "body": "Voici une réponse à la question.",
+        "author": "chat7",
+        "upvotes": 0,
+        "downvotes": 0,
+        "created_at": "2025-01-08T00:00:00Z"
+    }
+]</code></pre>
+                </div>
+            </div>
+
+            <!-- Route: POST /answers/ -->
+            <div class="card my-3">
+                <div class="card-header bg-success text-white">
+                    <h5>POST /answers/</h5>
+                </div>
+                <div class="card-body">
+                    <p>Permet de créer une nouvelle réponse à une question.</p>
+                    <h6>Paramètres requis :</h6>
+                    <ul>
+                        <li><strong>question</strong> : ID de la question (integer).</li>
+                        <li><strong>body</strong> : Contenu de la réponse (string).</li>
+                    </ul>
+                    <h6>Exemple de Réponse (Succès) :</h6>
+                    <pre><code>{
+    "id": 1,
+    "question": 1,
+    "body": "Voici une réponse à la question.",
+    "author": "chat7",
+    "upvotes": 0,
+    "downvotes": 0,
+    "created_at": "2025-01-08T00:00:00Z"
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- Route: DELETE /answers/{id}/ -->
+            <div class="card my-3">
+                <div class="card-header bg-success text-white">
+                    <h5>DELETE /answers/{id}/</h5>
+                </div>
+                <div class="card-body">
+                    <p>Permet de supprimer une réponse (seulement par son auteur).</p>
+                    <h6>Exemple de Réponse (Succès) :</h6>
+                    <pre><code>{
+    "message": "Suppression de la réponse effectuée avec succès."
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- Route: Upvote Answer -->
+            <div class="card my-3">
+                <div class="card-header bg-success text-white">
+                    <h5>POST /answers/{id}/upvote/</h5>
+                </div>
+                <div class="card-body">
+                    <p>Permet de voter positivement pour une réponse.</p>
+                    <h6>Exemple de Réponse (Succès) :</h6>
+                    <pre><code>{
+    "message": "Réponse upvotée",
+    "upvotes": 7
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- Route: Downvote Answer -->
+            <div class="card my-3">
+                <div class="card-header bg-success text-white">
+                    <h5>POST /answers/{id}/downvote/</h5>
+                </div>
+                <div class="card-body">
+                    <p>Permet de voter négativement pour une réponse.</p>
+                    <h6>Exemple de Réponse (Succès) :</h6>
+                    <pre><code>{
+    "message": "Réponse downvotée",
+    "downvotes": 4
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Edition de Profil -->
+        <section id="profile-edit" class="my-5">
+            <h2>4. Édition de Profil</h2>
+            <p>Cette section couvre la route pour modifier les informations d'un utilisateur connecté.</p>
+
+            <!-- Route: PUT /profile/edit/ -->
+            <div class="card my-3">
+                <div class="card-header bg-info text-white">
+                    <h5>PUT /profile/edit/</h5>
+                </div>
+                <div class="card-body">
+                    <p>Permet de modifier les informations de l'utilisateur connecté.</p>
+                    <h6>Paramètres requis :</h6>
+                    <ul>
+                        <li><strong>username</strong> : Nouveau nom d'utilisateur (string, optionnel).</li>
+                        <li><strong>email</strong> : Nouvelle adresse email (string, optionnel).</li>
+                        <li><strong>password</strong> : Nouveau mot de passe (string, optionnel).</li>
+                    </ul>
+                    <h6>Exemple de Réponse (Succès) :</h6>
+                    <pre><code>{
+    "message": "Profil mis à jour avec succès."
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+
+    </div>
+
+
+
+{% bootstrap_javascript %}
+</body>
+
+</html>
