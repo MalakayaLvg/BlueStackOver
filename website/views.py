@@ -160,3 +160,17 @@ class EditProfileView(APIView):
 
         user.save()
         return Response({"message": "Profil mis à jour avec succès."}, status=status.HTTP_200_OK)
+
+class ProfileView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        return Response({
+            "id": user.id,
+            "username": user.username,
+            "email": user.email,
+            "date_joined": user.date_joined,
+            "last_login": user.last_login,
+            "is_active": user.is_active
+        }, status=status.HTTP_200_OK)

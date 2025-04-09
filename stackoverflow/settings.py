@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'django_bootstrap5',
+    'corsheaders',
 ]
 
 REST_FRAMEWORK = {
@@ -57,6 +58,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'stackoverflow.urls'
@@ -145,3 +148,7 @@ EMAIL_HOST_USER = 'malakaya.lauvergnat@malakayalauvergnat.com'
 EMAIL_HOST_PASSWORD = 'jWJchVFsZtQp'
 DEFAULT_FROM_EMAIL = 'malakaya.lauvergnat@malakayalauvergnat.com'
 SITE_URL = "http://127.0.0.1:8000"
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
+]
