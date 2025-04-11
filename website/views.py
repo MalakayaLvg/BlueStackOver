@@ -35,19 +35,7 @@ class RegisterView(APIView):
         user = User.objects.create_user(username=username, password=password, email=email)
         user.save()
 
-        try:
-            subject = "Bienvenue sur notre plateforme !"
-            html_message = render_to_string('../templates/emails/confirmation_email.html', {'username': username})
-            plain_message = strip_tags(html_message)
-            from_email = 'malakaya.lauvergnat@malakayalauvergnat.com'
-            to_email = [email]
-
-            send_mail(subject, plain_message, from_email, to_email, html_message=html_message)
-
-        except Exception as e:
-            return Response({"error": f"Erreur lors de l'envoi de l'email : {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-        return Response({"message": "Utilisateur créé avec succès. Un email de confirmation a été envoyé."}, status=status.HTTP_201_CREATED)
+        return Response({"message": "Utilisateur créé avec succès."}, status=status.HTTP_201_CREATED)
 
 
 class LoginView(APIView):
